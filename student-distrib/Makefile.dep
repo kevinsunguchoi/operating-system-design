@@ -1,0 +1,38 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+idt_asm.o: idt_asm.S
+paging_init.o: paging_init.S
+x86_desc.o: x86_desc.S x86_desc.h types.h
+cursor.o: cursor.c cursor.h lib.h types.h keyboard.h filesystem.h \
+  syscallhandlers.h rtc.h idt.h tests.h paging.h paging_init.h x86_desc.h
+filesystem.o: filesystem.c filesystem.h lib.h types.h cursor.h keyboard.h \
+  syscallhandlers.h rtc.h idt.h tests.h paging.h paging_init.h x86_desc.h
+i8259.o: i8259.c i8259.h types.h lib.h cursor.h keyboard.h filesystem.h \
+  syscallhandlers.h rtc.h idt.h tests.h paging.h paging_init.h x86_desc.h
+idt.o: idt.c idt.h x86_desc.h types.h lib.h cursor.h keyboard.h \
+  filesystem.h syscallhandlers.h rtc.h tests.h paging.h paging_init.h \
+  i8259.h idt_asm.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h cursor.h \
+  keyboard.h filesystem.h syscallhandlers.h rtc.h idt.h tests.h paging.h \
+  paging_init.h i8259.h debug.h pit.h scheduling.h
+keyboard.o: keyboard.c lib.h types.h cursor.h keyboard.h filesystem.h \
+  syscallhandlers.h rtc.h idt.h tests.h paging.h paging_init.h x86_desc.h \
+  i8259.h scheduling.h pit.h
+lib.o: lib.c lib.h types.h cursor.h keyboard.h filesystem.h \
+  syscallhandlers.h rtc.h idt.h tests.h paging.h paging_init.h x86_desc.h
+paging.o: paging.c paging.h lib.h types.h cursor.h keyboard.h \
+  filesystem.h syscallhandlers.h rtc.h idt.h tests.h x86_desc.h \
+  paging_init.h
+pit.o: pit.c pit.h i8259.h types.h scheduling.h lib.h cursor.h keyboard.h \
+  filesystem.h syscallhandlers.h rtc.h idt.h tests.h paging.h \
+  paging_init.h x86_desc.h
+rtc.o: rtc.c lib.h types.h cursor.h keyboard.h filesystem.h \
+  syscallhandlers.h rtc.h idt.h tests.h paging.h paging_init.h x86_desc.h \
+  i8259.h
+scheduling.o: scheduling.c scheduling.h lib.h types.h cursor.h keyboard.h \
+  filesystem.h syscallhandlers.h rtc.h idt.h tests.h paging.h \
+  paging_init.h x86_desc.h pit.h i8259.h
+syscallhandlers.o: syscallhandlers.c syscallhandlers.h lib.h types.h \
+  cursor.h keyboard.h filesystem.h rtc.h idt.h tests.h paging.h \
+  paging_init.h x86_desc.h scheduling.h pit.h i8259.h
+tests.o: tests.c tests.h x86_desc.h types.h lib.h cursor.h keyboard.h \
+  filesystem.h syscallhandlers.h rtc.h idt.h paging.h paging_init.h
